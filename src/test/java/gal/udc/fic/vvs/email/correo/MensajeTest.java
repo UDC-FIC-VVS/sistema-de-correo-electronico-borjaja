@@ -2,6 +2,8 @@ package gal.udc.fic.vvs.email.correo;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Vector;
+
 import org.junit.Test;
 
 import gal.udc.fic.vvs.email.archivo.Texto;
@@ -57,9 +59,26 @@ public class MensajeTest {
 		String content = "Text content";
 		Texto text = new Texto("Text name", content);
 		Mensaje msg = new Mensaje(text);
-		// String preview = content.substring(0, Math.min(content.length(),
-		// Mensaje.TAMAÑO_PREVISUALIZACION)) + "...";
-		// assertEquals(preview, msg.obtenerPreVisualizacion());
+		String preview = content.substring(0, Math.min(content.length(), 32)) + "...";
+		assertEquals(preview, msg.obtenerPreVisualizacion());
+	}
+
+	@Test
+	public void TestMensajeSearchFound() {
+		String content = "Text content";
+		Texto text = new Texto("Text name", content);
+		Mensaje msg = new Mensaje(text);
+		Vector<Correo> resultado = new Vector<Correo>();
+		resultado.add(msg);
+		assertEquals(resultado, msg.buscar(content));
+	}
+
+	@Test
+	public void TestMensajeSearchNotFound() {
+		Texto text = new Texto("Text name", "Text content");
+		Mensaje msg = new Mensaje(text);
+		Vector<Correo> resultado = new Vector<Correo>();
+		assertEquals(resultado, msg.buscar("another content"));
 	}
 
 }
