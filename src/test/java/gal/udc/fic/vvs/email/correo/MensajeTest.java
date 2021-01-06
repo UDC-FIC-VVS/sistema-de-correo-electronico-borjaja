@@ -37,7 +37,7 @@ public class MensajeTest {
 	}
 
 	@Test
-	public void TestMensajenIconNotReaded() {
+	public void TestMensajeIconNotReaded() {
 		Texto text = new Texto("Text name", "Text content");
 		Mensaje msg = new Mensaje(text);
 		msg.establecerLeido(false);
@@ -45,11 +45,21 @@ public class MensajeTest {
 	}
 
 	@Test
-	public void TestMensajenIconReaded() {
+	public void TestMensajeIconReaded() {
 		Texto text = new Texto("Text name", "Text content");
 		Mensaje msg = new Mensaje(text);
 		msg.establecerLeido(true);
 		assertEquals(Correo.ICONO_MENSAJE, msg.obtenerIcono());
+	}
+
+	@Test
+	public void TestMensajeGetPreview() {
+		String content = "Text content";
+		Texto text = new Texto("Text name", content);
+		Mensaje msg = new Mensaje(text);
+		// String preview = content.substring(0, Math.min(content.length(),
+		// Mensaje.TAMAÑO_PREVISUALIZACION)) + "...";
+		// assertEquals(preview, msg.obtenerPreVisualizacion());
 	}
 
 }
