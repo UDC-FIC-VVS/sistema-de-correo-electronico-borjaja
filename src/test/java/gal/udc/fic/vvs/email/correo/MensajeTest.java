@@ -28,4 +28,28 @@ public class MensajeTest {
 		assertEquals(1, msg.obtenerNoLeidos());
 
 	}
+
+	@Test
+	public void TestMensajeGetSize() {
+		Texto text = new Texto("Text name", "Text content");
+		Mensaje msg = new Mensaje(text);
+		assertEquals(text.obtenerTamaño(), msg.obtenerTamaño());
+	}
+
+	@Test
+	public void TestMensajenIconNotReaded() {
+		Texto text = new Texto("Text name", "Text content");
+		Mensaje msg = new Mensaje(text);
+		msg.establecerLeido(false);
+		assertEquals(Correo.ICONO_NUEVO_MENSAJE, msg.obtenerIcono());
+	}
+
+	@Test
+	public void TestMensajenIconReaded() {
+		Texto text = new Texto("Text name", "Text content");
+		Mensaje msg = new Mensaje(text);
+		msg.establecerLeido(true);
+		assertEquals(Correo.ICONO_MENSAJE, msg.obtenerIcono());
+	}
+
 }
