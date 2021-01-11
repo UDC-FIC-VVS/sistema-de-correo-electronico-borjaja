@@ -12,10 +12,10 @@ public class MensajeTest {
 
 	@Test
 	public void TestContentInMensasjeIsText() {
-
-		Texto text = new Texto("Text name", "Text content");
+		String content = "Text content";
+		Texto text = new Texto("Text name", content);
 		Mensaje msg = new Mensaje(text);
-		// assertEquals(msg.)
+		assertEquals(msg.obtenerVisualizacion(), content);
 
 	}
 
