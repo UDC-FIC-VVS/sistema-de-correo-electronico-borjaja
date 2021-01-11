@@ -175,12 +175,48 @@ public class CarpetaLimitadaTest {
 		vector.add(msg2);
 		vector.add(msg3);
 
-		Carpeta folder = new Carpeta("Folder name");
+		CarpetaLimitada folder = new CarpetaLimitada(new Carpeta("Folder name"), 100);
 		folder.añadir(msg1);
 		folder.añadir(msg2);
 		folder.añadir(msg3);
 
 		assertEquals(vector, folder.buscar("text"));
+
+	}
+
+	@Test
+	public void TestCarpetaLimitadaBuscarAll() throws OperacionInvalida {
+		Vector<Mensaje> vector = new Vector<Mensaje>();
+		Mensaje msg1 = new Mensaje(new Texto("Name text 1", "Content text 1"));
+		Mensaje msg2 = new Mensaje(new Texto("Name text 2", "Content text 2"));
+		Mensaje msg3 = new Mensaje(new Texto("Name text 3", "Content text 3"));
+		vector.add(msg1);
+		vector.add(msg2);
+		vector.add(msg3);
+
+		CarpetaLimitada folder = new CarpetaLimitada(new Carpeta("Folder name"), 3);
+		folder.añadir(msg1);
+		folder.añadir(msg2);
+		folder.añadir(msg3);
+
+		assertEquals(folder.buscar("Content"), vector);
+
+	}
+
+	@Test
+	public void TestCarpetaLimitadaBuscarTwo() throws OperacionInvalida {
+		Vector<Mensaje> vector = new Vector<Mensaje>();
+		Mensaje msg1 = new Mensaje(new Texto("Name text 1", "Content text 1"));
+		Mensaje msg2 = new Mensaje(new Texto("Name text 2", "Content text 2"));
+		Mensaje msg3 = new Mensaje(new Texto("Name text 3", "Content text 3"));
+		vector.add(msg1);
+
+		CarpetaLimitada folder = new CarpetaLimitada(new Carpeta("Folder name"), 1);
+		folder.añadir(msg1);
+		folder.añadir(msg2);
+		folder.añadir(msg3);
+
+		assertEquals(folder.buscar("Content"), vector);
 
 	}
 
