@@ -145,18 +145,19 @@ public class CarpetaLimitadaTest {
 
 	@Test
 	public void TestCarpetaMostrarRuta() throws OperacionInvalida {
-		Vector<Mensaje> vector = new Vector<Mensaje>();
+		Vector<MensajeAbstracto> vector = new Vector<MensajeAbstracto>();
 		Mensaje msg1 = new Mensaje(new Texto("Name text 1", "Content text 1"));
 		Mensaje msg2 = new Mensaje(new Texto("Name text 2", "Content text 2"));
+		Adjunto adjunto = new Adjunto(msg2, new Texto("name adj", "content adj"));
 		Mensaje msg3 = new Mensaje(new Texto("Name text 3", "Content text 3"));
 		vector.add(msg1);
-		vector.add(msg2);
+		vector.add(adjunto);
 		vector.add(msg3);
 
 		CarpetaLimitada folder = new CarpetaLimitada(new Carpeta("Folder name"), 100);
 		CarpetaLimitada root = new CarpetaLimitada(new Carpeta("Root Folder name"), 100);
 		folder.añadir(msg1);
-		folder.añadir(msg2);
+		folder.añadir(adjunto);
 		folder.añadir(msg3);
 		folder.establecerPadre(root);
 

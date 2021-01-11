@@ -89,4 +89,13 @@ public class AdjuntoTest {
 
 	}
 
+	@Test
+	public void TestMensajeObtenerRuta() {
+		Texto text = new Texto("Text name", "Text content");
+		Mensaje msg = new Mensaje(text);
+		Adjunto adjunto = new Adjunto(msg, new Texto("name adj", "content adj"));
+
+		assertEquals(msg.obtenerRuta(), adjunto.obtenerRuta());
+	}
+
 }

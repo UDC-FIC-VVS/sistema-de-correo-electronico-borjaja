@@ -24,10 +24,11 @@ public class MensajeTest {
 
 		Texto text = new Texto("Text name", "Text content");
 		Mensaje msg = new Mensaje(text);
-		msg.establecerLeido(true);
-		assertEquals(0, msg.obtenerNoLeidos());
-		msg.establecerLeido(false);
-		assertEquals(1, msg.obtenerNoLeidos());
+		Adjunto adjunto = new Adjunto(msg, new Texto("name adj", "content adj"));
+		adjunto.establecerLeido(true);
+		assertEquals(0, adjunto.obtenerNoLeidos());
+		adjunto.establecerLeido(false);
+		assertEquals(1, adjunto.obtenerNoLeidos());
 
 	}
 
@@ -42,8 +43,9 @@ public class MensajeTest {
 	public void TestMensajeIconNotReaded() {
 		Texto text = new Texto("Text name", "Text content");
 		Mensaje msg = new Mensaje(text);
-		msg.establecerLeido(false);
-		assertEquals(Correo.ICONO_NUEVO_MENSAJE, msg.obtenerIcono());
+		Adjunto adjunto = new Adjunto(msg, new Texto("name adj", "content adj"));
+		adjunto.establecerLeido(false);
+		assertEquals(Correo.ICONO_NUEVO_MENSAJE, adjunto.obtenerIcono());
 	}
 
 	@Test
@@ -59,8 +61,9 @@ public class MensajeTest {
 		String content = "Text content";
 		Texto text = new Texto("Text name", content);
 		Mensaje msg = new Mensaje(text);
+		Adjunto adjunto = new Adjunto(msg, new Texto("name adj", "content adj"));
 		String preview = content.substring(0, Math.min(content.length(), 32)) + "...";
-		assertEquals(preview, msg.obtenerPreVisualizacion());
+		assertEquals(preview, adjunto.obtenerPreVisualizacion());
 	}
 
 	@Test
@@ -68,17 +71,19 @@ public class MensajeTest {
 		String content = "Text content";
 		Texto text = new Texto("Text name", content);
 		Mensaje msg = new Mensaje(text);
+		Adjunto adjunto = new Adjunto(msg, new Texto("name adj", "content adj"));
 		Vector<Correo> resultado = new Vector<Correo>();
-		resultado.add(msg);
-		assertEquals(resultado, msg.buscar(content));
+		resultado.add(adjunto);
+		assertEquals(resultado, adjunto.buscar(content));
 	}
 
 	@Test
 	public void TestMensajeSearchNotFound() {
 		Texto text = new Texto("Text name", "Text content");
 		Mensaje msg = new Mensaje(text);
+		Adjunto adjunto = new Adjunto(msg, new Texto("name adj", "content adj"));
 		Vector<Correo> resultado = new Vector<Correo>();
-		assertEquals(resultado, msg.buscar("another content"));
+		assertEquals(resultado, adjunto.buscar("another content"));
 	}
 
 }
