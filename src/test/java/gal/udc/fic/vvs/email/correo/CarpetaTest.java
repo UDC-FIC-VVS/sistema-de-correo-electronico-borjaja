@@ -86,4 +86,47 @@ public class CarpetaTest {
 
 	}
 
+	@Test
+	public void TestCarpetaBuscar() throws OperacionInvalida {
+		Vector<Mensaje> vector = new Vector<Mensaje>();
+		Mensaje msg1 = new Mensaje(new Texto("Name text 1", "Content text 1"));
+		Mensaje msg2 = new Mensaje(new Texto("Name text 2", "Content text 2"));
+		Mensaje msg3 = new Mensaje(new Texto("Name text 3", "Content text 3"));
+		vector.add(msg1);
+		vector.add(msg2);
+		vector.add(msg3);
+
+		Carpeta folder = new Carpeta("Folder name");
+		folder.añadir(msg1);
+		folder.añadir(msg2);
+		folder.añadir(msg3);
+
+		assertEquals(vector, folder.buscar("text"));
+
+	}
+
+	@Test
+	public void TestCarpetaVisualization() throws OperacionInvalida {
+		Mensaje msg1 = new Mensaje(new Texto("Name text 1", "Content text 1"));
+		Mensaje msg2 = new Mensaje(new Texto("Name text 2", "Content text 2"));
+		Mensaje msg3 = new Mensaje(new Texto("Name text 3", "Content text 3"));
+
+		String name = "Folder name";
+		Carpeta folder = new Carpeta(name);
+		folder.añadir(msg1);
+		folder.añadir(msg2);
+		folder.añadir(msg3);
+		assertEquals(name + " (3)", folder.obtenerPreVisualizacion());
+
+	}
+
+	@Test
+	public void TestCarpetaVisualizationEmpty() throws OperacionInvalida {
+		String name = "Folder name";
+		Carpeta folder = new Carpeta(name);
+
+		assertEquals(name, folder.obtenerPreVisualizacion());
+
+	}
+
 }
