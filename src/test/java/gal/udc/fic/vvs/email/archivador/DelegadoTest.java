@@ -89,7 +89,6 @@ public class DelegadoTest {
 
 		boolean added = gmail.almacenarCorreo(mensaje);
 
-		assertEquals(false, added);
 	}
 
 }
