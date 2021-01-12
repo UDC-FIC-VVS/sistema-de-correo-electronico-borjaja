@@ -76,4 +76,20 @@ public class DelegadoTest {
 		assertEquals(outlook.obtenerEspacioTotal(), outlook.obtenerEspacioDisponible());
 	}
 
+	@Test
+	public void testDelegadoLoop() {
+		Texto texto = new Texto("name", "content");
+		Correo mensaje = new Mensaje(texto);
+		int size = mensaje.obtenerTamaño() - 1;
+
+		Archivador gmail = new Delegado(new ArchivadorSimple("gmail", size));
+		Archivador outlook = new Delegado(new ArchivadorSimple("outlook", size));
+		gmail.establecerDelegado(outlook);
+		outlook.establecerDelegado(gmail);
+
+		boolean added = gmail.almacenarCorreo(mensaje);
+
+		assertEquals(false, added);
+	}
+
 }
