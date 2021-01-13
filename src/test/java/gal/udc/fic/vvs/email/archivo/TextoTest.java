@@ -2,53 +2,47 @@ package gal.udc.fic.vvs.email.archivo;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.pholser.junit.quickcheck.From;
+import com.pholser.junit.quickcheck.Property;
+import com.pholser.junit.quickcheck.generator.java.lang.StringGenerator;
+import com.pholser.junit.quickcheck.runner.JUnitQuickcheck;
+
+import gal.udc.fic.vvs.email.generators.TextoGenerator;
+
+@RunWith(JUnitQuickcheck.class)
 public class TextoTest {
 
 	private static final String TEXT_MIME_TYPE = "text/plain";
 
-	@Test
-	public void TestMymeTypeTexto() {
-		Texto texto = new Texto("Text name", "Text content");
-		assertEquals(TEXT_MIME_TYPE, texto.obtenerMimeType());
+	@Property
+	public void TestMymeTypeTexto(@From(TextoGenerator.class) Texto text) {
+		assertEquals(TEXT_MIME_TYPE, text.obtenerMimeType());
 	}
 
-	@Test
-	public void TestGetName() {
-		String textName = "text_test_get_name";
-
-		Texto text = new Texto(textName, "Text content");
-
-		assertEquals(textName, text.obtenerNombre());
+	@Property
+	public void TestGetName(@From(StringGenerator.class) String name, @From(StringGenerator.class) String content) {
+		Texto text = new Texto(name, content);
+		assertEquals(name, text.obtenerNombre());
 	}
 
-	@Test
-	public void TestGetContent() {
-		String textContent = "text_test_get_content";
-
-		Texto text = new Texto("Text content", textContent);
-
-		assertEquals(textContent, text.obtenerContenido());
+	@Property
+	public void TestGetContent(@From(StringGenerator.class) String name, @From(StringGenerator.class) String content) {
+		Texto text = new Texto(name, content);
+		assertEquals(content, text.obtenerContenido());
 	}
 
-	@Test
-	public void TestGetSize() {
-		String textContent = "text_test_get_content";
-
-		Texto text = new Texto("Text content", textContent);
-
-		assertEquals(textContent.length(), text.obtenerTamaño());
+	@Property
+	public void TestGetSize(@From(StringGenerator.class) String name, @From(StringGenerator.class) String content) {
+		Texto text = new Texto(name, content);
+		assertEquals(content.length(), text.obtenerTamaño());
 	}
 
-	@Test
-	public void TestPreview() {
-		String textName = "text_test_get_name";
-		String textContent = "text_test_get_content";
-
-		Texto text = new Texto(textName, textContent);
-		String textTest = textName + "(" + textContent.length() + " bytes, " + TEXT_MIME_TYPE + ")";
-
+	@Property
+	public void TestPreview(@From(StringGenerator.class) String name, @From(StringGenerator.class) String content) {
+		Texto text = new Texto(name, content);
+		String textTest = name + "(" + content.length() + " bytes, " + TEXT_MIME_TYPE + ")";
 		assertEquals(textTest, text.obtenerPreVisualizacion());
 	}
 }

@@ -2,53 +2,46 @@ package gal.udc.fic.vvs.email.archivo;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.pholser.junit.quickcheck.From;
+import com.pholser.junit.quickcheck.Property;
+import com.pholser.junit.quickcheck.generator.java.lang.StringGenerator;
+import com.pholser.junit.quickcheck.runner.JUnitQuickcheck;
+
+import gal.udc.fic.vvs.email.generators.AudioGenerator;
+
+@RunWith(JUnitQuickcheck.class)
 public class AudioTest {
 	private static final String AUDIO_MIME_TYPE = "audio/ogg";
 
-	@Test
-	public void TestMymeTypeAudio() {
-		Audio audio = new Audio("Audio name", "Audio content");
+	@Property
+	public void TestMymeTypeAudio(@From(AudioGenerator.class) Audio audio) {
 		assertEquals(AUDIO_MIME_TYPE, audio.obtenerMimeType());
 	}
 
-	@Test
-	public void TestGetName() {
-		String audioName = "audio_test_get_name";
-
-		Audio audio = new Audio(audioName, "Audio content");
-
-		assertEquals(audioName, audio.obtenerNombre());
+	@Property
+	public void TestGetName(@From(StringGenerator.class) String name, @From(StringGenerator.class) String content) {
+		Audio audio = new Audio(name, content);
+		assertEquals(name, audio.obtenerNombre());
 	}
 
-	@Test
-	public void TestGetContent() {
-		String audioContent = "audio_test_get_content";
-
-		Audio audio = new Audio("Audio name", audioContent);
-
-		assertEquals(audioContent, audio.obtenerContenido());
+	@Property
+	public void TestGetContent(@From(StringGenerator.class) String name, @From(StringGenerator.class) String content) {
+		Audio audio = new Audio(name, content);
+		assertEquals(content, audio.obtenerContenido());
 	}
 
-	@Test
-	public void TestGetSize() {
-		String audioContent = "audio_test_get_content";
-
-		Audio audio = new Audio("Audio name", audioContent);
-
-		assertEquals(audioContent.length(), audio.obtenerTamaño());
+	@Property
+	public void TestGetSize(@From(StringGenerator.class) String name, @From(StringGenerator.class) String content) {
+		Audio audio = new Audio(name, content);
+		assertEquals(content.length(), audio.obtenerTamaño());
 	}
 
-	@Test
-	public void TestPreview() {
-		String audioName = "audio_test_get_name";
-
-		String audioContent = "audio_test_get_content";
-
-		Audio audio = new Audio(audioName, audioContent);
-		String audioTest = audioName + "(" + audioContent.length() + " bytes, " + AUDIO_MIME_TYPE + ")";
-
+	@Property
+	public void TestPreview(@From(StringGenerator.class) String name, @From(StringGenerator.class) String content) {
+		Audio audio = new Audio(name, content);
+		String audioTest = name + "(" + content.length() + " bytes, " + AUDIO_MIME_TYPE + ")";
 		assertEquals(audioTest, audio.obtenerPreVisualizacion());
 	}
 }
