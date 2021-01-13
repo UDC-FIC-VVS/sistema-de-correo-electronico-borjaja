@@ -48,6 +48,20 @@ public class ArchivadorSimpleTest {
 
 		assertEquals(true, added);
 		assertEquals(false, added2);
+	}
+
+	@Test
+	public void TestArchivadorSimpleTestSpace() {
+
+		Texto texto = new Texto("name", "content");
+		Texto texto2 = new Texto("name2", "content2");
+		Correo mensaje = new Mensaje(texto);
+		Correo mensaje2 = new Mensaje(texto2);
+		int size = mensaje.obtenerTamaño();
+		Archivador archivador = new ArchivadorSimple("gmail", size);
+		boolean added = archivador.almacenarCorreo(mensaje);
+		boolean added2 = archivador.almacenarCorreo(mensaje2);
+
 		assertEquals(archivador.obtenerEspacioTotal() - size, archivador.obtenerEspacioDisponible());
 	}
 

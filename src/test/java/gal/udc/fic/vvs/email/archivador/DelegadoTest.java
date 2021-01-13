@@ -43,6 +43,19 @@ public class DelegadoTest {
 		boolean added = gmail.almacenarCorreo(mensaje);
 
 		assertEquals(true, added);
+	}
+
+	@Test
+	public void TestDelegadoSpace() {
+
+		Texto texto = new Texto("name", "content");
+		Correo mensaje = new Mensaje(texto);
+		int size = mensaje.obtenerTamaño() + 1;
+		Archivador gmail = new Delegado(new ArchivadorSimple("gmail", size));
+		Archivador outlook = new ArchivadorSimple("outlook", mensaje.obtenerTamaño());
+		gmail.establecerDelegado(outlook);
+		boolean added = gmail.almacenarCorreo(mensaje);
+
 		assertEquals(outlook.obtenerEspacioTotal(), outlook.obtenerEspacioDisponible());
 	}
 
@@ -58,7 +71,6 @@ public class DelegadoTest {
 		boolean added = gmail.almacenarCorreo(mensaje);
 
 		assertEquals(true, added);
-		assertEquals(gmail.obtenerEspacioTotal(), gmail.obtenerEspacioDisponible());
 	}
 
 	@Test
@@ -73,8 +85,6 @@ public class DelegadoTest {
 		boolean added = gmail.almacenarCorreo(mensaje);
 
 		assertEquals(false, added);
-		assertEquals(gmail.obtenerEspacioTotal(), gmail.obtenerEspacioDisponible());
-		assertEquals(outlook.obtenerEspacioTotal(), outlook.obtenerEspacioDisponible());
 	}
 
 	@Test(expected = OperacionInvalida.class)
