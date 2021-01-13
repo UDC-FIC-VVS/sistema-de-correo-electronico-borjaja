@@ -11,22 +11,20 @@ import gal.udc.fic.vvs.email.archivo.Texto;
 public class MensajeTest {
 
 	@Test
-	public void TestContentInMensasjeIsText() {
-		String content = "Text content";
-		Texto text = new Texto("Text name", content);
-		Mensaje msg = new Mensaje(text);
-		assertEquals(msg.obtenerVisualizacion(), content);
-
-	}
-
-	@Test
-	public void TestMensajeLeidoStateIsEditable() {
-
+	public void TestMensajeLeidoStateIsEditableTrue() {
 		Texto text = new Texto("Text name", "Text content");
 		Mensaje msg = new Mensaje(text);
 		Adjunto adjunto = new Adjunto(msg, new Texto("name adj", "content adj"));
 		adjunto.establecerLeido(true);
 		assertEquals(0, adjunto.obtenerNoLeidos());
+
+	}
+
+	@Test
+	public void TestMensajeLeidoStateIsEditableFalse() {
+		Texto text = new Texto("Text name", "Text content");
+		Mensaje msg = new Mensaje(text);
+		Adjunto adjunto = new Adjunto(msg, new Texto("name adj", "content adj"));
 		adjunto.establecerLeido(false);
 		assertEquals(1, adjunto.obtenerNoLeidos());
 
