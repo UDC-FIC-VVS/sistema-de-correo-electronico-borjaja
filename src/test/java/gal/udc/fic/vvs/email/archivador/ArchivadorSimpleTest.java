@@ -28,7 +28,7 @@ public class ArchivadorSimpleTest {
 		Texto texto = new Texto("name", "content");
 		Correo mensaje = new Mensaje(texto);
 
-		Archivador archivador = new ArchivadorSimple("gmail", mensaje.obtenerTamaño());
+		Archivador archivador = new ArchivadorSimple("gmail", mensaje.obtenerTamaño() + 1);
 		boolean added = archivador.almacenarCorreo(mensaje);
 
 		assertEquals(true, added);
