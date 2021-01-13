@@ -43,4 +43,15 @@ public class LogTest {
 
 	}
 
+	@Test
+	public void testDelegadoTestobtenerDelegado() {
+
+		DecoradorArchivador gmail = new Log(new Delegado(new ArchivadorSimple("gmail", 10)));
+		Archivador outlook = new ArchivadorSimple("outlook", 10);
+		gmail.establecerDelegado(outlook);
+
+		assertEquals(outlook, gmail.obtenerDelegado());
+
+	}
+
 }

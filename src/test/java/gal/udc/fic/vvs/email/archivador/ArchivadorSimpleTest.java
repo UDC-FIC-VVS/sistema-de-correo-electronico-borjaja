@@ -51,4 +51,11 @@ public class ArchivadorSimpleTest {
 		assertEquals(archivador.obtenerEspacioTotal() - size, archivador.obtenerEspacioDisponible());
 	}
 
+	@Test
+	public void TestArchivadorSimpleEstablecerDelegado() {
+		Archivador archivador = new ArchivadorSimple("gmail", 10);
+		archivador.establecerDelegado(archivador);
+
+	}
+
 }
