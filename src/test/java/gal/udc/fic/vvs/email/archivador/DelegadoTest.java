@@ -7,6 +7,7 @@ import org.junit.Test;
 import gal.udc.fic.vvs.email.archivo.Texto;
 import gal.udc.fic.vvs.email.correo.Correo;
 import gal.udc.fic.vvs.email.correo.Mensaje;
+import gal.udc.fic.vvs.email.correo.OperacionInvalida;
 
 public class DelegadoTest {
 	@Test
@@ -76,7 +77,7 @@ public class DelegadoTest {
 		assertEquals(outlook.obtenerEspacioTotal(), outlook.obtenerEspacioDisponible());
 	}
 
-	@Test
+	@Test(expected = OperacionInvalida.class)
 	public void testDelegadoLoop() {
 		Texto texto = new Texto("name", "content");
 		Correo mensaje = new Mensaje(texto);
