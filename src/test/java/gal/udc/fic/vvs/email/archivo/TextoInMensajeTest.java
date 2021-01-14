@@ -17,6 +17,15 @@ import gal.udc.fic.vvs.email.generators.MensajeGenerator;
 public class TextoInMensajeTest {
 	private static final String TEXT_MIME_TYPE = "text/plain";
 
+	/**
+	 * Comprobación del método de que el contenido del mensaje es un texto usando
+	 * introspección <br/>
+	 * Nivel de prueba: Unidad <br/>
+	 * Categoría de prueba: Prueba funcional dinámica de caja negra positiva. <br/>
+	 * Mecanismo de selección de datos: Se genera automaticamente Mensajes y se
+	 * cambia el acceso a su varible para determinar si su mimetype es correcto
+	 * <br/>
+	 */
 	@Property
 	public void TestContentInMensasjeIsText(@From(MensajeGenerator.class) Mensaje msg)
 			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
